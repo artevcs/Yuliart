@@ -34,18 +34,16 @@ public class FrmEmpresas extends JFrame {
          ArrayList<Empresa> modeloTablaEmpresas = cargarModeloTablaEmpresas();
          tablaEmpresas = new TablaEmpresas(modeloTablaEmpresas, dimension);
          add(tablaEmpresas);
-         setUbicacion(tablaEmpresas, 5,5);
+         setUbicacion(tablaEmpresas, 55,5);
     }
 
     private ArrayList<Empresa> cargarModeloTablaEmpresas(){
-        ArrayList<Empresa> modeloTablaEmpresas = new ArrayList<Empresa>();
+        ArrayList<Empresa> modeloTablaEmpresas = new ArrayList<>();
 
-        Empresa empresaAr = new Empresa("AR", "AGUILA REAL");
-        Empresa empresaCu = new Empresa("CU", "CUSAEM");
-
-        modeloTablaEmpresas.add(empresaAr);
-        modeloTablaEmpresas.add(empresaCu);
-
+        for(int i = 0; i < 6; i++){
+            Empresa empresa = new Empresa("E" + i, "Empresa " + i);
+            modeloTablaEmpresas.add(empresa);
+        }
         return modeloTablaEmpresas;
     }
 

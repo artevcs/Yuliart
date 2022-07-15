@@ -14,20 +14,25 @@ public class TablaEmpresas extends JPanel {
         this.modeloTablaEmpresas = modeloTablaEmpresas;
         this.dimensionDelContenedor = dimensionDelContenedor;
         configurar();
-
+        dibujar();
     }
 
     private void configurar(){
         setLayout(layout);
         setBackground(Color.white);
         int ancho = (int) (dimensionDelContenedor.getWidth() - 26);
-        int alto = (int) (dimensionDelContenedor.getHeight() - 100);
+        int alto = modeloTablaEmpresas.size()*(FilaEmpresas.ALTO + FilaEmpresas.SEPARACION);
         setPreferredSize(new Dimension(ancho,alto));
     }
 
-    private void rellenar(){
-        for (Empresa empresa:modeloTablaEmpresas) {
-            FilaEmpresas fila = new FilaEmpresas(empresa, dimensionDelContenedor);
+    private void dibujar(){
+        for (int indice = 0; indice < modeloTablaEmpresas.size();indice++){
+             Empresa empresa = modeloTablaEmpresas.get(indice);
+             FilaEmpresas fila = new FilaEmpresas(empresa, dimensionDelContenedor);
+             int north = (FilaEmpresas.ALTO + FilaEmpresas.SEPARACION) * indice;
+             int west = FilaEmpresas.SEPARACION;
+             setUbicacion(fila, north, west);
+             add(fila);
         }
     }
 
