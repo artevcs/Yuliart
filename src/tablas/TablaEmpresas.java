@@ -2,33 +2,37 @@ package tablas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TablaEmpresas extends JPanel {
     SpringLayout layout = new SpringLayout();
-    List<Empresa> empresas = new ArrayList<Empresa>();
+    List<Empresa> modeloTablaEmpresas;
+    Dimension dimensionDelContenedor;
 
-    public TablaEmpresas(){
+    public TablaEmpresas(List<Empresa> modeloTablaEmpresas, Dimension dimensionDelContenedor){
         super();
-        FilaEmpresas fila = new FilaEmpresas();
-        setUbicacion(fila, 5,5);
-        add(fila);
+        this.modeloTablaEmpresas = modeloTablaEmpresas;
+        this.dimensionDelContenedor = dimensionDelContenedor;
+        configurar();
+
     }
 
     private void configurar(){
         setLayout(layout);
         setBackground(Color.white);
-        setPreferredSize(new Dimension(700,500));
+        int ancho = (int) (dimensionDelContenedor.getWidth() - 26);
+        int alto = (int) (dimensionDelContenedor.getHeight() - 100);
+        setPreferredSize(new Dimension(ancho,alto));
+    }
+
+    private void rellenar(){
+        for (Empresa empresa:modeloTablaEmpresas) {
+            FilaEmpresas fila = new FilaEmpresas(empresa, dimensionDelContenedor);
+        }
     }
 
     private void setUbicacion(Component componente, int north, int west){
         layout.putConstraint(SpringLayout.NORTH, componente, north, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, componente, west, SpringLayout.WEST, this);
-    }
-
-    private void agregarFila(String id, String nombre){
-        Empresa empresa = new Empresa(id, nombre);
-        empresas.add(empresa);
     }
 }
