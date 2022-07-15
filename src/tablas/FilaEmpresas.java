@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FilaEmpresas extends JPanel {
-    public static int ALTO = 60;
-    public static int SEPARACION = 5;
+    final public static int ALTO = 35;
+    final public static int SEPARACION = 5;
     Empresa empresa;
     Dimension dimensionDelContenedor;
     SpringLayout layout = new SpringLayout();
@@ -15,12 +15,24 @@ public class FilaEmpresas extends JPanel {
         this.empresa = empresa;
         this.dimensionDelContenedor= dimensionDelContenedor;
         configurar();
+        agregarControles();
     }
 
     private void configurar(){
         setLayout(layout);
         setBackground(Color.gray);
-        int ancho = (int) (dimensionDelContenedor.getWidth() - 36);
+        int ancho = (int) (dimensionDelContenedor.getWidth() - 43);
         setPreferredSize(new Dimension(ancho, ALTO));
+    }
+
+    private void agregarControles(){
+        CampoTexto txtId = new CampoTexto(40);
+        setUbicacion(txtId, 5,5);
+        add(txtId);
+    }
+
+    private void setUbicacion(Component componente, int north, int west){
+        layout.putConstraint(SpringLayout.NORTH, componente, north, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.WEST, componente, west, SpringLayout.WEST, this);
     }
 }

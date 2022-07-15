@@ -33,14 +33,19 @@ public class FrmEmpresas extends JFrame {
     private void agregarTabla(){
          ArrayList<Empresa> modeloTablaEmpresas = cargarModeloTablaEmpresas();
          tablaEmpresas = new TablaEmpresas(modeloTablaEmpresas, dimension);
-         add(tablaEmpresas);
-         setUbicacion(tablaEmpresas, 55,5);
+         JScrollPane scrollPane = new JScrollPane(tablaEmpresas);
+         scrollPane.setPreferredSize (new Dimension(ANCHO - 15, ALTO - 92));
+         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+         setUbicacion(scrollPane, 55,0);
+         add(scrollPane);
     }
 
     private ArrayList<Empresa> cargarModeloTablaEmpresas(){
         ArrayList<Empresa> modeloTablaEmpresas = new ArrayList<>();
 
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 4; i++){
             Empresa empresa = new Empresa("E" + i, "Empresa " + i);
             modeloTablaEmpresas.add(empresa);
         }
